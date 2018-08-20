@@ -5,10 +5,11 @@ This is a web application that implements an interactive retrieval and learning 
 Cheng Li, Yue Wang, Paul Resnick, Qiaozhu Mei. ReQ-ReC: High recall retrieval with query pooling and interactive classification. InProceedings of the 37th international ACM SIGIR conference on Research & development in information retrieval 2014 Jul 3 (pp. 163-172). ACM.
 http://www-personal.umich.edu/~raywang/pub/SIGIR2014-ReQReC.pdf
 
-## Toy dataset:
-	The deliverable is a web application, so one can follow INSTALL.txt and set up the web service. A tiny dataset (20 tweets) is already shipped as part of the deliverable, located under <base_dir>/fulltext/data/; one can try the system with it without preparing one's own data. After setting up the system, one can simply type in "obama", and there should be a few tweets shown up in the first round.
+## Toy dataset
+	
+The deliverable is a web application. One can follow INSTALL.txt and set up the web service. A tiny dataset (20 tweets) is already shipped as part of the deliverable, located under <base_dir>/fulltext/data/; one can try the system with it without preparing one's own data. After setting up the system, one can simply type in "obama", and there should be a few tweets shown up in the first round.
 
-### Directory structure:
+### Directory structure
 	src/					
 		conf/				
 		java/				- the web application is a Java servlet

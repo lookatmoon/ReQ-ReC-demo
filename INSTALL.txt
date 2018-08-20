@@ -1,0 +1,133 @@
+INSTALL.txt
+
+This deliverable is targeted at Linux/Unix environment with bash shell. This document will walk you through the installation process of Double-Loop system, and if everything goes smoothly, you will set up a high-recall search engine on your system.
+
+For questions, please kindly contact raywang@umich.edu.
+
+Software requirements
+	Java Development Kit (JDK) 7.0
+		http://www.oracle.com/technetwork/java/javase/downloads/index.html
+	NetBeans IDE: 7.4
+		https://netbeans.org/community/releases/74/
+	Apache Tomcat 7.0
+		http://tomcat.apache.org/download-70.cgi
+	Python 2.7
+		http://www.python.org/download/releases/2.7/
+	C/C++ build environment:
+		Linux: GCC, 4.4.3+
+			http://ftp.gnu.org/gnu/gcc/gcc-4.4.3/
+		Or, Mac: Xcode 5 for Mac OS X 10.9 (Maverick)
+			https://developer.apple.com/xcode/
+	CMake: 2.8.1+
+		http://www.cmake.org/cmake/resources/software.html
+
+The deliverable already contains the following open source packages:
+	Apache Lucene v4.0.0 (for full-text indexing, text tokenization)
+		http://lucene.apache.org/
+	Armadillo matrix library v3.930 (for vector-space clustering)
+		http://arma.sourceforge.net/download.html
+	LibLinear v1.93 (for active classification)
+		http://www.csie.ntu.edu.tw/~cjlin/liblinear/
+	Bootstrap v2.3.2 (Web JS/CSS framework)
+		http://getbootstrap.com/2.3.2/
+
+Installation steps:
+	0. Uncompress the zip file to <base_dir>
+
+	1. Data preparation
+		Note: one can skip "data preparation" by trying the toy dataset (20 tweets) located <base_dir>/fulltext/data/.
+
+		1.1 Raw data file format
+			Make an empty directory <data_dir> to hold all the raw data files. Each to-be-indexed document is represented as one line:
+				<docID><tab_character><text>
+				where:
+				<docID> := consecutive alphanumerical string;
+				<tab_character> := ASCII character '\t';
+				<text> := any English text with newline('\n') and tab ('\t') replaced.
+			Each file may contain multiple documents (thus multiple lines), and there can be multiple such files under <data_dir>.
+			Small examples can be found in <base_dir>/fulltext/data/.
+
+		1.2 Build index
+			A full-text indexing tool is implemented as part of the deliverable. One can build the index by:
+				java -jar <base_dir>/resources/indexing/index.jar <data_dir> <index_dir>
+			<index_dir> will be automatically created if it does not exist; however it is recommended that it is an empty directory. After indexing, the Lucene index files are stored under the directory <index_dir>.
+			The index of the aforementioned small examples can be found in <base_dir>/fulltext/index/.
+
+		1.3 Register new index location (if necessary)
+			If you've changed the index directory <index_dir> to somewhere different than <base_dir>/fulltext/index/, then you have to "tell" the search module this message as follows:
+			Open the script <base_dir>/resources/search/src/search_api.sh, find the line
+				index='../../../fulltext/index'
+			and change it to
+				index='<index_dir>'
+			.
+		
+	2. System setup
+		2.1 Compile individual tools
+			2.1.1 Comple Armadillo matrix library
+			Note: the library is for clustering, and will be faster if your system has matrix acceleration libraries such as LAPACK, BLAS, Intel MKL, or AMD ACML. It's OK if you don't have them; Armadillo will still compile.
+				cd <base_dir>/resources/clustering/arma/
+				sh configure
+				cmake .
+				make
+
+			2.1.2 Compile clustering program
+				cd <base_dir>/resources/clustering/
+				make
+
+			2.1.3 Compile LibLinear package
+				cd <base_dir>/resources/liblinear/liblinear-1.93/
+				make
+
+		2.2 Change file permission
+				chmod u+x <base_dir>/resources/liblinear/liblinear-1.93/train
+				chmod u+x <base_dir>/resources/liblinear/liblinear-1.93/predict
+				chmod u+x <base_dir>/resources/clustering/clustering
+				chmod u+x <base_dir>/resources/search/src/search_api.sh
+				chmod u+x <base_dir>/resources/search/src/run.sh
+				
+		2.3 Deploy web application
+			2.3.1 Set absolute path
+			Get the absolute path to <base_dir> by running in shell:
+				cd <base_dir>
+				pwd
+			And record the output. Assume the absolute path is <absolute_base_dir>. Open <base_dir>/src/java/global/GlobalVar.java, set the variable 
+				public static String prefix = "<absolute_base_dir>";
+			. Add a slash "/" at the end of <absolute_base_dir> (to make it a valid path when concatenated with sub-directory strings).
+		
+			2.3.2 Compile a new .war file
+			Open NetBeans IDE. Go to "File" - "Open Project ...", browse to the parent directory of <base_dir>, and open the project. It takes a few seconds for NetBeans to parse the profile of the project. Once opened, build the project by "Run" - "Clean and Build Project"
+
+			2.3.3 Setup Tomcat
+			Assume Apache Tomcat is extracted to the directory <tomcat>. Since Tomcat and NetBeans may use the same port (8080), it is good practice to set the port of Tomcat to be something different:
+			Go to <tomcat>/conf/server.xml, Find the HTTP <Connector> element (search for the string "8080"), and change the "port" attribute from "8080" (default) to, say, "9090".
+			To start Tomcat, run:
+				cd <tomcat>/bin
+				sh startup.sh
+			To check if the web service is running, open your web browser and go to URL:
+				<hostname>:9090/
+			If you run it locally, then <hostname> = "localhost". You should see a welcome page.
+
+			2.3.4 Launch web application
+			Now, run the following shell command:
+				cp <base_dir>/dist/DoubleLoop.war <tomcat>/webapps/
+			A folder DoubleLoop/ will be automatically created under <tomcat>/webapps/ in a few seconds, which means the web application is launched.
+
+	3. Test it out!
+		Open your favorite web browser, and go to:
+			<hostname>:9090/DoubleLoop
+		
+		You can simply type your queries, or set search parameters in "Advanced" options. Remember to set a different "Query ID" in "Advanced" options when you want to switch to a new query; otherwise the newly retrieved documents will overwrite the old ones with the same Query ID.
+
+	4. Result files
+		As the user explores the document collection with Double-Loop system, he/she will accumulate more and more labeled examples. Each query has a Query ID (or <qid>) that is set on the first round of search. Identified by <qid>, the results will be stored at:
+		retrieved documents:
+			<base_dir>/web/files/data/backup/<qid>/completeRetrievedData.txt
+		labeled documents:
+			<base_dir>/web/files/data/backup/<qid>/train/<timestamp>.txt
+
+	5. Online demo
+		The live demo is hosted at:
+			http://gauss.si.umich.edu:8080/dloop/
+		Since it is hosted on an internal server of UMSI, one has to first connect to U of M VPN (download VPN software at http://www.itcom.itd.umich.edu/vpn/) with uniqname and password, then browse the website.
+
+		The demo indexed 10% of tweet stream in April, 2013, which is around 50 million tweets. The service would probably be up until the end of the Fall 2013.

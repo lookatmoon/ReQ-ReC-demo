@@ -1,0 +1,8 @@
+-1	252618886648844288	 8:obama:1 9:http_url:1 13:#obama:1 33:http_url_http_url:1 94:http_url_</s>:1	anthonypaceofa #obama rt this to all #pennsylvania voters you can verify your #pa voter registration http_url http_url
+-1	252623135667548160	 5:on:1 8:obama:1 9:http_url:1 10:#tcot:1 11:tcot:1 18:#p2:1 19:p2:1 94:http_url_</s>:1	obama administration blames friendly fire attacks in afghanistan on us troops #p2 #lnyhbt #teaparty #tcot #gop http_url
+-1	252623227824783362	 8:obama:1 9:http_url:1 18:#p2:1 19:p2:1	lwdgrfx rt crewislife poll obama surges ahead among catholic voters http_url #p2 #obamabiden2012
+-1	252618941145444352	 8:obama:1 10:#tcot:1 11:tcot:1 68:a:1 74:his:1 96:is:1 113:obama_is:1	obama is like a high school senior who needs more time to complete his homework from eight grade ! #tcot #ocra rnc #teaparty
+-1	252622321838354433	 8:obama:1 13:#obama:1	rbrucemorgan i find it incredible anyone who supports #israel can even consider voting for #obama he has made the choice to suppor
+-1	252623001315594240	 8:obama:1 9:http_url:1 13:#obama:1 68:a:1 74:his:1 94:http_url_</s>:1 96:is:1 100:romney:1	apcampaign #obama says he just okay at debating but his rival romney is a good debater #election2012 http_url
+-1	252623127316688896	 8:obama:1	chrisrockoz im voting for pres obama because i value all americans not just the rich white straight christian man #gop2012
+-1	252622590466740224	 7:amp:1 8:obama:1 13:#obama:1 72:by:1 87:#obama_by:1 88:obama_by:1	it tied in #nc #obama by -number- in #oh late last week was #nv amp #co tight so well see what happens in this key week 1st debate wednesday

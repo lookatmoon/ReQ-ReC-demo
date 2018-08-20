@@ -1,0 +1,3 @@
+1210_231711	test	" obama "	500	../../../fulltext/index
+0815_140001	test	" obama "	500	../../../fulltext/index
+0820_090444	test	" obama "	500	../../../fulltext/index

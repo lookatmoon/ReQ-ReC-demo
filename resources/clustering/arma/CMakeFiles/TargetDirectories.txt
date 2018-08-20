@@ -1,0 +1,7 @@
+/home/ray/Documents/Projects/DoubleLoop/resources/clustering/arma/CMakeFiles/install/strip.dir
+/home/ray/Documents/Projects/DoubleLoop/resources/clustering/arma/CMakeFiles/edit_cache.dir
+/home/ray/Documents/Projects/DoubleLoop/resources/clustering/arma/CMakeFiles/armadillo.dir
+/home/ray/Documents/Projects/DoubleLoop/resources/clustering/arma/CMakeFiles/list_install_components.dir
+/home/ray/Documents/Projects/DoubleLoop/resources/clustering/arma/CMakeFiles/install/local.dir
+/home/ray/Documents/Projects/DoubleLoop/resources/clustering/arma/CMakeFiles/rebuild_cache.dir
+/home/ray/Documents/Projects/DoubleLoop/resources/clustering/arma/CMakeFiles/install.dir

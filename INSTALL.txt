@@ -125,9 +125,3 @@ Installation steps:
 		labeled documents:
 			<base_dir>/web/files/data/backup/<qid>/train/<timestamp>.txt
 
-	5. Online demo
-		The live demo is hosted at:
-			http://gauss.si.umich.edu:8080/dloop/
-		Since it is hosted on an internal server of UMSI, one has to first connect to U of M VPN (download VPN software at http://www.itcom.itd.umich.edu/vpn/) with uniqname and password, then browse the website.
-
-		The demo indexed 10% of tweet stream in April, 2013, which is around 50 million tweets. The service would probably be up until the end of the Fall 2013.
